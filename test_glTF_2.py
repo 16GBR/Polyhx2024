@@ -41,6 +41,6 @@ def modify_function(node):
 # Example usage
 input_gltf_path = "3D_Models/Test.glb"
 output_gltf_path = "3D_Models/Test_modifie.glb"
-object_to_copy = "Cube.002"
+object_to_copy = "Window"
 
 copy_and_modify_gltf(input_gltf_path, output_gltf_path, object_to_copy, modify_function)
