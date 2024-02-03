@@ -10,3 +10,6 @@ class batiment:
 
     def afficher_lettre(self):
         return self.lettre
+    
+    def get_couleur(self):
+        return self.couleur
