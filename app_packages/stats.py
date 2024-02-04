@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 def diagramme_bande(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts, nbPark):
     plt.figure()
     # Sample data
-    categories = ['Ecole', 'Loisirs', 'Epicerie', 'Retail', 'Boutique', 'Bureaux', 'Park', 'Plex','Apparts']
-    values = [nbEcole, nbLoisirs, nbEpiceries, nbRetail, nbBoutique, nbBureaux,nbPark, nbPlex,nbApparts]
+    categories = ['Ecole', 'Loisirs', 'Epicerie', 'Retail', 'Boutique', 'Parc', 'Bureau', 'Plex','Appart']
+    values = [nbEcole, nbLoisirs, nbEpiceries, nbRetail, nbBoutique, nbPark, nbBureaux, nbPlex,nbApparts]
 
     # Create a bar chart
-    colors = ['#008EE7', '#E7D900', '#8000E7', '#E76300','#E7007C', '#474747', '#28E700', '#838383', '#838383']
+    colors = ['#008EE7', '#E7D900', '#8000E7', '#E76300','#E7007C', '#28E700', '#474747', '#838383', '#838383']
     plt.bar(categories, values, color=colors)
 
     for i, values in enumerate(values):
