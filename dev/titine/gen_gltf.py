@@ -14,7 +14,7 @@ def gen_gltf(map):
     input_gltf_path = "../../3D_Models/Models.gltf"
     output_gltf_path = "../../3D_Models/Map.gltf"
     rotations_1 = np.array([])
-    rotations_2 = 
+    rotations_2 = np.array([])
 
     liste_noms=["School_2x3","GStore_1x1"]
     liste_postitions=[positions_1,positions_2]
@@ -22,5 +22,5 @@ def gen_gltf(map):
 
 
 
-    copy_and_modify_gltf(input_gltf_path, output_gltf_path, liste_noms, modify_function, x_size, y_size, liste_postitions, grid_to_nodes)
+    copy_and_modify_gltf(input_gltf_path, output_gltf_path, liste_noms, liste_rotations, modify_function, x_size, y_size, liste_postitions, grid_to_nodes)
 

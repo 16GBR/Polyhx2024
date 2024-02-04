@@ -2,16 +2,16 @@ from main5 import main
 import numpy as np
 from stats import diagramme_bande, pie_chart
 
-grid = np.full((100, 100), None, dtype=object)
+grid = np.full((10, 10), None, dtype=object)
 
-nbPlex = 5775
-nbApparts = 1890
-nbEpiceries = 300
-nbBureaux = 200
-nbEcole = 80*6
-nbLoisirs = 160*2 
-nbBoutique = 300
-nbRetail = 100*2
+nbPlex = 5
+nbApparts = 18
+nbEpiceries = 3
+nbBureaux = 20
+nbEcole = 6
+nbLoisirs = 13
+nbBoutique = 6
+nbRetail = 6
 
 etagesPlex = 3
 etagesApparts = 6
