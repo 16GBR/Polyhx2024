@@ -30,7 +30,7 @@ def creer_carres(center, size):
     y = [center[1] - size / 2, center[1] - size / 2, center[1] + size / 2, center[1] + size / 2, center[1] - size / 2]
     return x, y
 
-def check_tout_est_place(nb_maisons_type1, nb_maisons_type2, nb_epicerie, nb_job, nb_ecole, nb_centre_loisir, nb_boutique, nb_retail):
+def check_tout_est_place(nb_maisons_type1, nb_maisons_type2, nb_epicerie, nb_job, nb_ecoord_ye, nb_centre_loisir, nb_boutique, nb_retail):
     everything_is_there = True
 
     if nb_maisons_type1<nb_maisons_type1_needed:
@@ -41,7 +41,7 @@ def check_tout_est_place(nb_maisons_type1, nb_maisons_type2, nb_epicerie, nb_job
         everything_is_there = False
     if nb_job<nb_job_needed:
         everything_is_there = False
-    if nb_ecole<nb_ecole_needed:
+    if nb_ecoord_ye<nb_ecoord_ye_needed:
         everything_is_there = False
     if nb_centre_loisir<nb_centre_loisir_needed:
         everything_is_there = False
@@ -53,17 +53,17 @@ def check_tout_est_place(nb_maisons_type1, nb_maisons_type2, nb_epicerie, nb_job
     return everything_is_there
 
 #Parametres de generation
-nb_maisons_type1_needed = 519
-nb_maisons_type2_needed = 164
-nb_epicerie_needed = 27
-nb_job_needed = 18
-nb_ecole_needed = 7*6 #car bloc de 2x3
-nb_centre_loisir_needed = 15*2 #car bloc de 1x2
-nb_boutique_needed = 27
-nb_retail_needed = 9*2
+nb_maisons_type1_needed = 215
+nb_maisons_type2_needed = 100
+nb_epicerie_needed = 20
+nb_job_needed = 15
+nb_ecole_needed = 4*6 #car bloc de 2x3
+nb_centre_loisir_needed = 4*2 #car bloc de 1x2
+nb_boutique_needed = 5
+nb_retail_needed = 5
 
 #Creation de la map vide
-map = np.full((30, 30), None, dtype=object)
+map = np.full((20, 20), None, dtype=object)
 
 #Generer ellipse (quartier)
 theta, eccentricite, superficie = 120, 0.95, 25
@@ -78,71 +78,110 @@ nb_centre_loisir = 0
 nb_boutique = 0
 nb_retail = 0
 
-while check_tout_est_place(nb_maisons_type1, nb_maisons_type2, nb_epicerie, nb_job, nb_ecole, nb_centre_loisir, nb_boutique, nb_retail) == False:
-    for row in range(map.shape[0]):
-        for col in range(map.shape[1]):
-            #numb = np.floor(np.random.rand()*10)
-            numb = np.random.rand()*10
-            if numb <=6 and nb_maisons_type1<nb_maisons_type1_needed and map[row, col] == None:
-                map[row, col] = batiment(couleur="red", lettre="M1")
-                nb_maisons_type1=nb_maisons_type1+1   
-            elif numb <=9 and nb_maisons_type2<nb_maisons_type2_needed and map[row, col] == None:
-                map[row, col] = batiment(couleur="salmon", lettre="M2")
-                nb_maisons_type2=nb_maisons_type2+1    
-            elif numb <=9.1 and nb_epicerie<nb_epicerie_needed and map[row, col] == None:
-                map[row, col] = batiment(couleur="brown", lettre="Ep")
-                nb_epicerie=nb_epicerie+1  
-            elif numb <=9.3 and nb_job<nb_job_needed and map[row, col] == None:
-                map[row, col] = batiment(couleur="magenta", lettre="J")
-                nb_job=nb_job+1  
-            elif numb <=9.4 and nb_ecole<nb_ecole_needed and map[row, col] == None: #important que first pcq pas de check pour toutes les cases
-                pile_face = np.random.rand()
-                if pile_face<=.5 and row+1<map.shape[0] and col+2<map.shape[1]:#2x3
-                    map[row, col] = batiment(couleur="gold", lettre="Ec")
-                    map[row, col+1] = batiment(couleur="gold", lettre="Ec")
-                    map[row, col+2] = batiment(couleur="gold", lettre="Ec")
-                    map[row+1, col] = batiment(couleur="gold", lettre="Ec")
-                    map[row+1, col+1] = batiment(couleur="gold", lettre="Ec")
-                    map[row+1, col+2] = batiment(couleur="gold", lettre="Ec")
-                    nb_ecole=nb_ecole+6
-                elif row+2<map.shape[0] and col+1<map.shape[1]: #3x2
-                    map[row, col] = batiment(couleur="gold", lettre="Ec")
-                    map[row+1, col] = batiment(couleur="gold", lettre="Ec")
-                    map[row+2, col] = batiment(couleur="gold", lettre="Ec")
-                    map[row, col+1] = batiment(couleur="gold", lettre="Ec")
-                    map[row+1, col+1] = batiment(couleur="gold", lettre="Ec")
-                    map[row+2, col+1] = batiment(couleur="gold", lettre="Ec")
-                    nb_ecole=nb_ecole+6
-            elif numb <=9.5 and nb_centre_loisir<nb_centre_loisir_needed and map[row, col] == None and map[row+1, col] == None and map[row, col+1] == None:
-                pile_face = np.random.rand()
-                if pile_face<=.5 and row+1<map.shape[0]:#2x1
-                    map[row, col] = batiment(couleur="blue", lettre="C")
-                    map[row+1, col] = batiment(couleur="blue", lettre="C")
-                    nb_centre_loisir=nb_centre_loisir+2 
-                elif col+1<map.shape[1]: #1x2
-                    map[row, col] = batiment(couleur="blue", lettre="C")
-                    map[row, col+1] = batiment(couleur="blue", lettre="C")
-                    nb_centre_loisir=nb_centre_loisir+2 
-            elif numb <= 9.6 and nb_boutique<nb_boutique_needed and map[row, col] == None:
-                map[row, col] = batiment(couleur="darkgray", lettre="B")
-                nb_boutique=nb_boutique+1  
-            elif numb <=9.7 and nb_retail<nb_retail_needed and map[row, col] == None:
-                map[row, col] = batiment(couleur="black", lettre="R")
-                nb_retail=nb_retail+1  
+#ECOLE
+while nb_ecole<nb_ecole_needed: 
+    coord_x = int(np.floor(np.random.rand()*map.shape[0]))
+    coord_y = int(np.floor(np.random.rand()*map.shape[1]))
+    pile_face = np.random.rand()
+    if pile_face<=.5 and coord_x+1<map.shape[0] and coord_y+2<map.shape[1]:#2x3
+        map[coord_x, coord_y] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x, coord_y+1] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x, coord_y+2] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x+1, coord_y] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x+1, coord_y+1] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x+1, coord_y+2] = batiment(couleur="gold", lettre="Ec")
+        nb_ecole=nb_ecole+6
+    elif coord_x+2<map.shape[0] and coord_y+1<map.shape[1]: #3x2
+        map[coord_x, coord_y] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x+1, coord_y] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x+2, coord_y] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x, coord_y+1] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x+1, coord_y+1] = batiment(couleur="gold", lettre="Ec")
+        map[coord_x+2, coord_y+1] = batiment(couleur="gold", lettre="Ec")
+        nb_ecole=nb_ecole+6
+
+#CENTRE LOISIR
+while nb_centre_loisir<nb_centre_loisir_needed: 
+    coord_x = int(np.floor(np.random.rand()*map.shape[0]))
+    coord_y = int(np.floor(np.random.rand()*map.shape[1]))
+    pile_face = np.random.rand()
+    if pile_face<=.5 and coord_x+1<map.shape[0] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None:#2x1
+        map[coord_x, coord_y] = batiment(couleur="blue", lettre="C")
+        map[coord_x+1, coord_y] = batiment(couleur="blue", lettre="C")
+        nb_centre_loisir=nb_centre_loisir+2 
+    elif coord_y+1<map.shape[1] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None: #1x2
+        map[coord_x, coord_y] = batiment(couleur="blue", lettre="C")
+        map[coord_x, coord_y+1] = batiment(couleur="blue", lettre="C")
+        nb_centre_loisir=nb_centre_loisir+2 
+
+#RETAIL
+while nb_retail<nb_retail_needed: 
+    coord_x = int(np.floor(np.random.rand()*map.shape[0]))
+    coord_y = int(np.floor(np.random.rand()*map.shape[1]))
+    pile_face = np.random.rand()
+    if pile_face<=.5 and (coord_x+1)<map.shape[0] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None:#2x1
+        map[coord_x, coord_y] = batiment(couleur="black", lettre="R")
+        map[coord_x+1, coord_y] = batiment(couleur="black", lettre="R")
+        nb_retail=nb_retail+2 
+    elif coord_y+1<map.shape[1] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None: #1x2
+        map[coord_x, coord_y] = batiment(couleur="black", lettre="R")
+        map[coord_x, coord_y+1] = batiment(couleur="black", lettre="R")
+        nb_retail=nb_retail+2 
+
+#BOUTIQUE
+while nb_boutique<nb_boutique_needed: 
+    coord_x = int(np.floor(np.random.rand()*map.shape[0]))
+    coord_y = int(np.floor(np.random.rand()*map.shape[1]))
+    if map[coord_x, coord_y] == None:
+        map[coord_x, coord_y] = batiment(couleur="darkgray", lettre="B")
+        nb_boutique=nb_boutique+1 
+
+#JOB
+while nb_boutique<nb_boutique_needed: 
+    coord_x = int(np.floor(np.random.rand()*map.shape[0]))
+    coord_y = int(np.floor(np.random.rand()*map.shape[1]))
+    if map[coord_x, coord_y] == None:
+        map[coord_x, coord_y] = batiment(couleur="magenta", lettre="J")
+        nb_job=nb_job+1 
+
+#EPICERIE
+while nb_epicerie<nb_epicerie_needed: 
+    coord_x = int(np.floor(np.random.rand()*map.shape[0]))
+    coord_y = int(np.floor(np.random.rand()*map.shape[1]))
+    if map[coord_x, coord_y] == None:
+        map[coord_x, coord_y] = batiment(couleur="brown", lettre="Ep")
+        nb_epicerie=nb_epicerie+1 
+
+#MAISONS TYPE 2
+while nb_maisons_type2<nb_maisons_type2_needed: 
+    coord_x = int(np.floor(np.random.rand()*map.shape[0]))
+    coord_y = int(np.floor(np.random.rand()*map.shape[1]))
+    if map[coord_x, coord_y] == None:
+        map[coord_x, coord_y] = batiment(couleur="salmon", lettre="M2")
+        nb_maisons_type2=nb_maisons_type2+1 
+
+#MAISONS TYPE 1
+while nb_maisons_type1<nb_maisons_type1_needed: 
+    coord_x = int(np.floor(np.random.rand()*map.shape[0]))
+    coord_y = int(np.floor(np.random.rand()*map.shape[1]))
+    if map[coord_x, coord_y] == None:
+        map[coord_x, coord_y] = batiment(couleur="red", lettre="M1")
+        nb_maisons_type1=nb_maisons_type1+1    
+
 
 #fill les trous de parc
-for row in range(map.shape[0]):
-    for col in range(map.shape[1]):
-        if map[row, col] == None:
-            map[row, col] = batiment(couleur="green", lettre="P")
-
-
+for coord_x in range(map.shape[0]):
+    for coord_y in range(map.shape[1]):
+        if map[coord_x, coord_y] == None:
+            map[coord_x, coord_y] = batiment(couleur="green", lettre="P")
+         
+            
 def dist_mesure(lettre):
     dist_min = 1000
     for i in range(map.shape[0]):
                 for j in range(map.shape[1]):
                     if map[i, j].afficher_lettre() == lettre:
-                        dist = abs(i-row)+abs(j-col)
+                        dist = abs(i-coord_x)+abs(j-coord_y)
                         if dist<dist_min:
                             dist_min=dist
     return dist_min
@@ -234,7 +273,3 @@ fig.update_layout(showlegend=False)
 
 #montrer le plot
 fig.show()
-
-
-
-
