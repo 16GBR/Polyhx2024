@@ -73,6 +73,7 @@ def main(zoning):
     nb_centre_loisir = 0
     nb_boutique = 0
     nb_retail = 0
+    nb_park=0
 
     #ECOLE
     while nb_ecole<nb_ecole_needed: 
@@ -170,6 +171,7 @@ def main(zoning):
         for coord_y in range(map.shape[1]):
             if map[coord_x, coord_y] == None:
                 map[coord_x, coord_y] = batiment(couleur="green", lettre="P")
+                nb_park = nb_park+1
 
 
 
@@ -294,9 +296,10 @@ def main(zoning):
     nbRetail = nb_retail_needed
     etagesPlex = etage_plex
     etagesApparts = etage_appart
+    nbPark = nb_park
 
-    diagramme_bande(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts)
-    pie_chart(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts)
+    diagramme_bande(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts,nbPark)
+    pie_chart(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts, nbPark)
 
 
     minutes, seconds = divmod(social_credit, 60)
