@@ -8,6 +8,8 @@ def diagramme_bande(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRe
 
     # Create a bar chart
     plt.bar(categories, values, color='blue')
+    for i, values in enumerate(values):
+        plt.text(i, values + 0.5, str(values), ha='center', va='bottom')
 
     # Add labels and title
     plt.xlabel('Type de batiment')

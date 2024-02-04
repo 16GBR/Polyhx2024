@@ -204,8 +204,8 @@ def main(zoning):
                 liste_temps_M2.append(temps)
 
     #Calculer le social credit pour la map generee
-    ratio=[2/7, 5/7, 5/7, 2/7, 1/7, .5/7, .5/7]
-    den_ratio = 16/7
+    ratio=[2/7, 0/7, 5/7, 2/7, 1/7, .5/7, .5/7]
+    den_ratio = 11/7
 
     #cas erreur pour pas crash
     if nb_maisons_type1_needed ==0:
