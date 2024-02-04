@@ -5,6 +5,7 @@ import plotly.graph_objects as go
 import math
 from .gerener_quartier import centeredAngledElliptic
 from .stats import diagramme_bande, pie_chart
+from .gen_gltf import gen_gltf
 
 #from dev.titine.gen_gltf import gen_gltf
 
@@ -282,7 +283,7 @@ def main(zoning):
         for coord_y in range(map.shape[1]):
             grid_3D[coord_x, coord_y] = map[coord_x, coord_y].afficher_lettre()
     
-    #gen_gltf(grid_3D)
+    gen_gltf(grid_3D)
 
 
     #stats
