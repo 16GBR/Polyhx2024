@@ -42,7 +42,7 @@
                 <p class="time">Average time: {{ social_credit|default("") }}</p>
             </div>
             <div class="top-right">
-                <model-viewer alt="3D Model output" src="{{ url_for('static', filename='model/output.gltf') }}" shadow-intensity="2" shadow-softness="0.5" camera-controls touch-action="pan-y"></model-viewer>
+                <model-viewer alt="3D Model output" src="{{ url_for('static', filename='model/output.glb') }}" shadow-intensity="2" shadow-softness="0.5" camera-controls touch-action="pan-y"></model-viewer>
             </div>
             <div class="bottom">
                 <img src="/static/images/diagramme_bandes.png" alt="Diagramme a bandes">
