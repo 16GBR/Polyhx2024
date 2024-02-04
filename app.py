@@ -19,14 +19,15 @@ def process_form():
     parks = request.form['parks']
 
     #print(f"Form submitted with values: Width={width}, Population={population}, Commercial={commercial}, Community={community}, Parks={parks}")
-    main.main(zoning.blocsAPlacer(
+    social_credit= main.main(zoning.blocsAPlacer(
         np.ones((int(width), int(width))), 
         int(population), 
         float(commercial)/100, 
         float(community)/100, 
         float(parks)/100, 
         10, 20))
-    return render_template("index.html", width=width, population=population, commercial=commercial, community=community, parks=parks)
+
+    return render_template("index.html", width=width, population=population, commercial=commercial, community=community, parks=parks, social_credit=social_credit)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=42069)

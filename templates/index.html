@@ -8,7 +8,6 @@
     <body>
         <div class="left">
             <h1>Walkable City Generator</h1>
-            <p>Yes it can!</p>
 
             <h2>Play with a few parameters and...</h2>
             <form action="/process_form" method="post">
@@ -43,5 +42,8 @@
         <div class="right" style="width: 395.5px; height: 979px;">
             <model-viewer alt="3D Model output" src="{{ url_for('static', filename='model/output.glb') }}" shadow-intensity="2" shadow-softness="0.5" camera-controls touch-action="pan-y"></model-viewer>
         </div>
+        <img src="/static/images/diagramme_bandes.png" alt="Diagramme a bandes">
+        <img src="/static/images/pie_chart.png" alt="Pie Chart">
+        <p>{{ social_credit|default("0 min 0 sec") }}</p>
     </body>
 </html>

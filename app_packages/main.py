@@ -297,3 +297,7 @@ def main(zoning):
 
     diagramme_bande(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts)
     pie_chart(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts)
+
+
+    minutes, seconds = divmod(social_credit, 60)
+    return f"{int(minutes)} min {int(seconds)} sec"
