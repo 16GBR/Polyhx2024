@@ -19,8 +19,6 @@ def diagramme_bande(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRe
 
 def pie_chart(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts, targetPopulation):
 
-    import matplotlib.pyplot as plt
-
     # Sample data
     labels = ['Résidentiel', 'Commercial', 'Communautaire']
     sizes = [nbPlex+nbApparts, nbEpiceries+nbBoutique+nbBureaux+nbRetail,nbEcole+nbLoisirs]
@@ -33,3 +31,18 @@ def pie_chart(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, 
 
     # Show the plot
     plt.show()
+
+def nb_solar_pannels(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts, targetPopulation):
+
+    consumption_total= 0
+    #consumption_total = consumption_total+ nbEcole*0.88*6*40*40 #GJ/m^2 /year?
+    #consumption_total = consumption_total+(nbPlex+nbApparts)*90.5 #GJ/year
+    #consumption_total = consumption_total+nbEpiceries*0.189*40*40/0.09290304 #GJ/m^2/year
+    #consumption_total = consumption_total+nbRetail*0.05148*2*40*40/0.09290304 #GJ/m^2/year
+
+    consumption_total = consumption_total+ nbEcole*11*6*40*40/0.09290304 #kWh/year
+    consumption_total = consumption_total+(nbPlex+nbApparts)*11*40*40/0.09290304 #kWh/year
+    consumption_total = consumption_total+nbEpiceries*44.2*40*40/0.09290304 #kWh/year
+    
+
+

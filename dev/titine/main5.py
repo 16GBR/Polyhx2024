@@ -1,10 +1,11 @@
 from batiment import batiment
-from maison import maison
 import numpy as np
 import plotly.graph_objects as go
 
 import math
 from gerener_quartier import centeredAngledElliptic
+
+from gen_gltf import gen_gltf
 
 # Fonction pour voir si point a l'interieur d'une certaine ellipse
 def is_point_inside(x_point, y_point, x_shape, y_shape):
@@ -169,7 +170,7 @@ def main(grid_size_x, grid_size_y, nbEcole, nbLoisirs, nbEpiceries, nbBoutique, 
 
     print("Calcul du temps")
     #trouver le temps de deplacement pour chaque maison
-    vit_moy=1.5 # m/s
+    vit_moy=1.34 # m/s
     facteur_distance = 40 #m
     liste_temps_M1 = [] 
     liste_temps_M2 = []            
@@ -255,3 +256,12 @@ def main(grid_size_x, grid_size_y, nbEcole, nbLoisirs, nbEpiceries, nbBoutique, 
 
     #montrer le plot
     fig.show()
+
+    #generation array pour 3D
+    grid_3D = np.empty((grid_size_x, grid_size_y), dtype='U10')
+
+    for coord_x in range(map.shape[0]):
+        for coord_y in range(map.shape[1]):
+            grid_3D[coord_x, coord_y] = map[coord_x, coord_y].afficher_lettre()
+    
+    gen_gltf(grid_3D)
