@@ -8,7 +8,6 @@
 			"onAutoForward": "openPreview"
 		}
 	},
-
 	"postCreateCommand": "pip install --no-index --find-links=./local_packages --extra-index-url=https://pypi.org/simple -r requirements.txt",
-	"postStartCommand": "python app.py",
+	"postStartCommand": "python app.py"
 }

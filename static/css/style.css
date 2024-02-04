@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Honk:MORF@25&display=swap');
+
+:root {
+    --background-color: #1a1a1a; /* Dark mode background color */
+    --text-color: #ffffff; /* Dark mode text color */
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+    margin: 0; /* Remove default margin for the body */
+    display: flex; /* Use flexbox for layout */
+    height: 100vh;
+  }
+
+  .left {
+    width: 20vw; /* Set the width of the left column to 20% */
+  }
+
+  .right {
+    width: 80vw;
+  }
+
+  h1 {
+    font-family: 'Honk', system-ui;
+  }
+
+  model-viewer {
+    width: 80vw;
+    height: 100vh;
+  }

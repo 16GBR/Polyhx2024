@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>My Walkable City</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <script src="{{ url_for('static', filename='js/form.js') }}"></script>
+        <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    </head>
+    <body>
+        <div class="left">
+            <h1>Walkable City Generator</h1>
+            <p>Yes it can!</p>
+
+            <h2>Play with a few parameters and...</h2>
+            <form action="/process_form" method="post">
+                <div class="slider-container">
+                    <label for="width">Width:</label>
+                    <input type="range" id="width" name="width" min="20" max="100" value="{{ width|default(50) }}" step="5">
+                    <output for="width">{{ width|default(50) }}</output>
+                </div>
+                <div class="slider-container">
+                    <label for="population">Population:</label>
+                    <input type="range" id="population" name="population" min="16000" max="750000" value="{{ population|default(50000) }}" step="2000">
+                    <output for="population">{{ population|default(50000) }}</output>
+                </div>
+                <div class="slider-container">
+                    <label for="commercial">Commercial:</label>
+                    <input type="range" id="commercial" name="commercial" min="5" max="20" value="{{ commercial|default(12) }}" step="1">
+                    <output for="commercial">{{ commercial|default(12) }}</output>
+                </div>
+                <div class="slider-container">
+                    <label for="community">Community:</label>
+                    <input type="range" id="community" name="community" min="0" max="10" value="{{ community|default(5) }}" step="1">
+                    <output for="community">{{ community|default(5) }}</output>
+                </div>
+                <div class="slider-container">
+                    <label for="parks">Parks:</label>
+                    <input type="range" id="parks" name="parks" min="5" max="10" value="{{ parks|default(7) }}" step="1">
+                    <output for="parks">{{ parks|default(7) }}</output>
+                </div>
+                <button type="submit">Badabing Badaboom!</button>
+            </form>
+        </div>
+        <div class="right" style="width: 395.5px; height: 979px;">
+            <model-viewer alt="3D Model output" src="{{ url_for('static', filename='model/output.glb') }}" shadow-intensity="2" shadow-softness="0.5" camera-controls touch-action="pan-y"></model-viewer>
+        </div>
+    </body>
+</html>
