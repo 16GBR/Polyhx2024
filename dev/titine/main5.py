@@ -37,20 +37,25 @@ def dist_mesure(lettre, row, col, map):
                     dist_min=dist
     return dist_min
 
-def main(grid_size_x, grid_size_y, nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts, targetPopulations):
+def main(zoning):
 
     #Parametres de generation
-    nb_maisons_type1_needed = nbPlex
-    nb_maisons_type2_needed = nbApparts
-    nb_epicerie_needed = nbEpiceries
-    nb_job_needed = nbBureaux
-    nb_ecole_needed = nbEcole 
-    nb_centre_loisir_needed = nbLoisirs
-    nb_boutique_needed = nbBoutique
-    nb_retail_needed = nbRetail
+    grid_size_x = zoning[0].shape[0]
+    grid_size_y = zoning[0].shape[1]
 
-    etage_plex = etagesPlex
-    etage_appart = etagesApparts
+    nb_maisons_type1_needed = zoning[7]
+    nb_maisons_type2_needed = zoning[9]
+    nb_epicerie_needed = zoning[3]
+    nb_job_needed = zoning[5]
+    nb_ecole_needed = zoning[1]
+    nb_centre_loisir_needed = zoning[2]
+    nb_boutique_needed = zoning[4]
+    nb_retail_needed = zoning[6]
+
+    etage_plex = zoning[8]
+    etage_appart = zoning[10]
+
+    target_population = zoning[11]
 
     #Creation de la map vide
     map = np.full((grid_size_x, grid_size_y), None, dtype=object)
