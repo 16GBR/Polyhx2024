@@ -26,11 +26,11 @@ def diagramme_bande(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRe
 def pie_chart(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts, nbPark):
     plt.figure()
     # Sample data
-    labels = ['Résidentiel', 'Commercial', 'Communautaire']
-    sizes = [nbPlex+nbApparts, nbEpiceries+nbBoutique+nbBureaux+nbRetail,nbEcole+nbLoisirs+nbPark]
+    labels = ['Résidentiel', 'Commercial', 'Communautaire', 'Parcs']
+    sizes = [nbPlex+nbApparts, nbEpiceries+nbBoutique+nbBureaux+nbRetail,nbEcole+nbLoisirs,nbPark]
 
     # Create a pie chart
-    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=['red', 'green', 'blue'])
+    plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90, colors=['#838383', 'orange', 'blue', '#28E700'])
 
     # Add a title
     plt.title('Pie Chart de la réparatition des batiments')
