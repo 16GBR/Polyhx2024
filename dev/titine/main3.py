@@ -30,28 +30,6 @@ def creer_carres(center, size):
     y = [center[1] - size / 2, center[1] - size / 2, center[1] + size / 2, center[1] + size / 2, center[1] - size / 2]
     return x, y
 
-def check_tout_est_place(nb_maisons_type1, nb_maisons_type2, nb_epicerie, nb_job, nb_ecoord_ye, nb_centre_loisir, nb_boutique, nb_retail):
-    everything_is_there = True
-
-    if nb_maisons_type1<nb_maisons_type1_needed:
-        everything_is_there = False
-    if nb_maisons_type2<nb_maisons_type2_needed:
-        everything_is_there = False
-    if nb_epicerie<nb_epicerie_needed:
-        everything_is_there = False
-    if nb_job<nb_job_needed:
-        everything_is_there = False
-    if nb_ecoord_ye<nb_ecoord_ye_needed:
-        everything_is_there = False
-    if nb_centre_loisir<nb_centre_loisir_needed:
-        everything_is_there = False
-    if nb_boutique<nb_boutique_needed:
-        everything_is_there = False
-    if nb_retail<nb_retail_needed:
-        everything_is_there = False
-
-    return everything_is_there
-
 #Parametres de generation
 nb_maisons_type1_needed = 215
 nb_maisons_type2_needed = 100
@@ -105,11 +83,11 @@ while nb_centre_loisir<nb_centre_loisir_needed:
     coord_x = int(np.floor(np.random.rand()*map.shape[0]))
     coord_y = int(np.floor(np.random.rand()*map.shape[1]))
     pile_face = np.random.rand()
-    if pile_face<=.5 and coord_x+1<map.shape[0] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None:#2x1
+    if pile_face<=.5 and coord_x+1<map.shape[0] and coord_y+1<map.shape[1] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None:#2x1
         map[coord_x, coord_y] = batiment(couleur="blue", lettre="C")
         map[coord_x+1, coord_y] = batiment(couleur="blue", lettre="C")
         nb_centre_loisir=nb_centre_loisir+2 
-    elif coord_y+1<map.shape[1] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None: #1x2
+    elif coord_y+1<map.shape[1] and coord_x+1<map.shape[0] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None: #1x2
         map[coord_x, coord_y] = batiment(couleur="blue", lettre="C")
         map[coord_x, coord_y+1] = batiment(couleur="blue", lettre="C")
         nb_centre_loisir=nb_centre_loisir+2 
@@ -119,11 +97,11 @@ while nb_retail<nb_retail_needed:
     coord_x = int(np.floor(np.random.rand()*map.shape[0]))
     coord_y = int(np.floor(np.random.rand()*map.shape[1]))
     pile_face = np.random.rand()
-    if pile_face<=.5 and (coord_x+1)<map.shape[0] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None:#2x1
+    if pile_face<=.5 and (coord_x+1)<map.shape[0] and coord_y+1<map.shape[1] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None:#2x1
         map[coord_x, coord_y] = batiment(couleur="black", lettre="R")
         map[coord_x+1, coord_y] = batiment(couleur="black", lettre="R")
         nb_retail=nb_retail+2 
-    elif coord_y+1<map.shape[1] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None: #1x2
+    elif coord_y+1<map.shape[1] and coord_x+1<map.shape[0] and map[coord_x, coord_y] == None and map[coord_x+1, coord_y] == None and map[coord_x, coord_y+1] == None: #1x2
         map[coord_x, coord_y] = batiment(couleur="black", lettre="R")
         map[coord_x, coord_y+1] = batiment(couleur="black", lettre="R")
         nb_retail=nb_retail+2 
@@ -137,7 +115,7 @@ while nb_boutique<nb_boutique_needed:
         nb_boutique=nb_boutique+1 
 
 #JOB
-while nb_boutique<nb_boutique_needed: 
+while nb_job<nb_job_needed: 
     coord_x = int(np.floor(np.random.rand()*map.shape[0]))
     coord_y = int(np.floor(np.random.rand()*map.shape[1]))
     if map[coord_x, coord_y] == None:
@@ -195,28 +173,27 @@ for row in range(map.shape[0]):
     for col in range(map.shape[1]):
         if map[row, col].afficher_lettre() == "M1":
             temps = np.zeros(7)                           
-            temps[0]=dist_mesure("P")*vit_moy*facteur_distance
-            temps[1]=dist_mesure("J")*vit_moy*facteur_distance
-            temps[2]=dist_mesure("Ec")*vit_moy*facteur_distance
-            temps[3]=dist_mesure("C")*vit_moy*facteur_distance
-            temps[4]=dist_mesure("Ep")*vit_moy*facteur_distance
-            temps[5]=dist_mesure("B")*vit_moy*facteur_distance
-            temps[6]=dist_mesure("R")*vit_moy*facteur_distance
+            temps[0]=dist_mesure("P")/vit_moy*facteur_distance
+            temps[1]=dist_mesure("J")/vit_moy*facteur_distance
+            temps[2]=dist_mesure("Ec")/vit_moy*facteur_distance
+            temps[3]=dist_mesure("C")/vit_moy*facteur_distance
+            temps[4]=dist_mesure("Ep")/vit_moy*facteur_distance
+            temps[5]=dist_mesure("B")/vit_moy*facteur_distance
+            temps[6]=dist_mesure("R")/vit_moy*facteur_distance
             liste_temps_M1.append(temps)
         if map[row, col].afficher_lettre() == "M2":
             temps = np.zeros(7)                           
-            temps[0]=dist_mesure("P")*vit_moy*facteur_distance
-            temps[1]=dist_mesure("J")*vit_moy*facteur_distance
-            temps[2]=dist_mesure("Ec")*vit_moy*facteur_distance
-            temps[3]=dist_mesure("C")*vit_moy*facteur_distance
-            temps[4]=dist_mesure("Ep")*vit_moy*facteur_distance
-            temps[5]=dist_mesure("B")*vit_moy*facteur_distance
-            temps[6]=dist_mesure("R")*vit_moy*facteur_distance
+            temps[0]=dist_mesure("P")/vit_moy*facteur_distance
+            temps[1]=dist_mesure("J")/vit_moy*facteur_distance
+            temps[2]=dist_mesure("Ec")/vit_moy*facteur_distance
+            temps[3]=dist_mesure("C")/vit_moy*facteur_distance
+            temps[4]=dist_mesure("Ep")/vit_moy*facteur_distance
+            temps[5]=dist_mesure("B")/vit_moy*facteur_distance
+            temps[6]=dist_mesure("R")/vit_moy*facteur_distance
             liste_temps_M2.append(temps)
 
 #Calculer le social credit pour la map generee
 ratio=[2/7, 5/7, 5/7, 2/7, 1/7, .5/7, .5/7]
-ratio = ratio
 den_ratio = 16/7
 
 social_credit = 0
@@ -225,15 +202,15 @@ for liste in liste_temps_M1:
     sum = 0
     for i in range(liste.shape[0]):
         sum = sum+temps[i]*ratio[i]
-    sum_all_house = sum_all_house+sum/den_ratio
+    sum_all_house = sum_all_house+sum/den_ratio*20
 
 for liste in liste_temps_M2:
     sum = 0
     for i in range(liste.shape[0]):
         sum = sum+temps[i]*ratio[i]
-    sum_all_house = sum_all_house+sum/den_ratio
+    sum_all_house = sum_all_house+sum/den_ratio*(20*6)
 
-social_credit = sum_all_house/(nb_maisons_type1_needed + nb_maisons_type2_needed)
+social_credit = sum_all_house/(nb_maisons_type1_needed*20 + nb_maisons_type2_needed*(20*6))
 print(social_credit)
 
 # Creer des carres
