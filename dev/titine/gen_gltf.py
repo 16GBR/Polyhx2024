@@ -13,6 +13,9 @@ def gen_gltf(map):
 
     input_gltf_path = "../../3D_Models/Models.gltf"
     output_gltf_path = "../../3D_Models/Map.gltf"
+    # input_gltf_path = "Models.gltf"
+    # output_gltf_path = "Map.gltf"
+    
     rotations_1 = np.array([])
     rotations_2 = np.array([])
 
