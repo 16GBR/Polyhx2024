@@ -22,9 +22,3 @@ L'utilisateur est invité à entrer certains paramètres pour configurer le gén
 
 Il appuie ensuite sur le bouton "Badabing Badaboom!" et un quartier est généré. Des graphiques sont ensuite montrés en lien avec le quartier généré. De plus, un estimé moyen du temps de transport (marche) que doit effectuer chaque habitant de ce quartier.
 
-
-
-
-INSERT INTO Students (name) VALUES ('Robert');
-DROP TABLE Students;
---');
