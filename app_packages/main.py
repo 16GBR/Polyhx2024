@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import math
 from .gerener_quartier import centeredAngledElliptic
 
-from gen_gltf import gen_gltf
+#from dev.titine.gen_gltf import gen_gltf
 
 # Fonction pour voir si point a l'interieur d'une certaine ellipse
 def is_point_inside(x_point, y_point, x_shape, y_shape):
@@ -269,4 +269,4 @@ def main(zoning):
         for coord_y in range(map.shape[1]):
             grid_3D[coord_x, coord_y] = map[coord_x, coord_y].afficher_lettre()
     
-    gen_gltf(grid_3D)
+    #gen_gltf(grid_3D)
