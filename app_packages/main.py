@@ -1,9 +1,9 @@
-from batiment import batiment
+from .batiment import batiment
 import numpy as np
 import plotly.graph_objects as go
 
 import math
-from gerener_quartier import centeredAngledElliptic
+from .gerener_quartier import centeredAngledElliptic
 
 from gen_gltf import gen_gltf
 
