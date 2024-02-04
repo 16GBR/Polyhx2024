@@ -346,27 +346,27 @@
     {
       "mesh": 0,
       "translation": [
-        2,
-        -2,
-        0
+        -1,
+        0,
+        1
       ],
       "name": "School_2x3"
     },
     {
       "mesh": 0,
       "translation": [
-        2,
         0,
-        0
+        0,
+        1
       ],
       "name": "School_2x3"
     },
     {
       "mesh": 1,
       "translation": [
-        2,
-        4,
-        0
+        -1,
+        0,
+        1
       ],
       "name": "GStore_1x1"
     }
