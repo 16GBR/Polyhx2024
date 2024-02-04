@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 
 import math
 from .gerener_quartier import centeredAngledElliptic
+from .stats import diagramme_bande, pie_chart
 
 #from dev.titine.gen_gltf import gen_gltf
 
@@ -206,6 +207,16 @@ def main(zoning):
     ratio=[2/7, 5/7, 5/7, 2/7, 1/7, .5/7, .5/7]
     den_ratio = 16/7
 
+    #cas erreur pour pas crash
+    if nb_maisons_type1_needed ==0:
+        nb_maisons_type1_needed=1
+    if nb_maisons_type2_needed ==0:
+        nb_maisons_type2_needed=1
+    if etage_plex ==0:
+        etage_plex=1
+    if etage_appart==0:
+        etage_appart=1
+
     print("Calcul du social credit")
     social_credit = 0
     sum_all_house = 0
@@ -270,3 +281,19 @@ def main(zoning):
             grid_3D[coord_x, coord_y] = map[coord_x, coord_y].afficher_lettre()
     
     #gen_gltf(grid_3D)
+
+
+    #stats
+    nbPlex = nb_maisons_type1_needed
+    nbApparts = nb_maisons_type2_needed
+    nbEpiceries = nb_epicerie_needed
+    nbBureaux = nb_job_needed
+    nbEcole = nb_ecole_needed
+    nbLoisirs = nb_centre_loisir_needed
+    nbBoutique = nb_boutique_needed
+    nbRetail = nb_retail_needed
+    etagesPlex = etage_plex
+    etagesApparts = etage_appart
+
+    diagramme_bande(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts)
+    pie_chart(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts)
