@@ -1,14 +1,12 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
+from app_packages import main, zoning
+import numpy as np
 
 @app.route("/")
 def index():
     return render_template("index.html")
-
-
-from app_packages import main, zoning
-import numpy as np
 
 @app.route('/process_form', methods=['POST'])
 def process_form():
@@ -18,8 +16,9 @@ def process_form():
     community = request.form['community']
     parks = request.form['parks']
 
-    #print(f"Form submitted with values: Width={width}, Population={population}, Commercial={commercial}, Community={community}, Parks={parks}")
-    social_credit= main.main(zoning.blocsAPlacer(
+    print(f"Form values: Width={width}, Population={population}, Commercial={commercial}, Community={community}, Parks={parks}")
+    
+    social_credit = main.main(zoning.blocsAPlacer(
         np.ones((int(width), int(width))), 
         int(population), 
         float(commercial)/100, 
