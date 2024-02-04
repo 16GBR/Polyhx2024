@@ -15,7 +15,9 @@ def diagramme_bande(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRe
     plt.title('Repartition des divers batiments')
 
     # Show the plot
-    plt.show()
+    file_path = "static/images/diagramme_bandes.png"
+    plt.savefig(file_path, dpi=300, bbox_inches='tight')
+    #plt.show()
 
 def pie_chart(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts, targetPopulation):
 
@@ -30,7 +32,9 @@ def pie_chart(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, 
     plt.title('Pie Chart de la réparatition des batiments')
 
     # Show the plot
-    plt.show()
+    file_path = "static/images/pie_chart.png"
+    plt.savefig(file_path, dpi=300, bbox_inches='tight')
+    #plt.show()
 
 def nb_solar_pannels(nbEcole, nbLoisirs, nbEpiceries, nbBoutique, nbBureaux, nbRetail, nbPlex, etagesPlex, nbApparts, etagesApparts, targetPopulation):
 
