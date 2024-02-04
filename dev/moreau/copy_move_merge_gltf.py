@@ -15,13 +15,16 @@ def copy_and_modify_gltf(input_path, output_path, liste_noms, modification_funct
                 break
 
 
-        # Translation du premier element et storage de la valeur de reference
-        pygltflib.Node().from_dict(gltf.nodes[object_index].to_dict()).translation=[int(grid_to_nodes*positions[0,0]),0,int(grid_to_nodes*positions[0,1])]
-        ref_position_x=positions[0,0]
-        ref_position_y=positions[0,1]
+        # # Translation du premier element et storage de la valeur de reference
+        # pygltflib.Node().from_dict(gltf.nodes[object_index].to_dict()).translation=[int(grid_to_nodes*positions[0,0]),0,int(grid_to_nodes*positions[0,1])]
+        # ref_position_x=positions[0,0]
+        # ref_position_y=positions[0,1]
 
-        # Modification de la liste pour positions subséquentes
-        positions=np.delete(positions,0,0)
+        ref_position_x=0
+        ref_position_y=0
+
+        # # Modification de la liste pour positions subséquentes
+        # positions=np.delete(positions,0,0)
 
         if len(positions)>0:
             # Loop itératif pour chacun des objets à dupliquer et placer
@@ -53,5 +56,5 @@ def modify_function(node,positions,x_size,y_size,i,grid_to_nodes,ref_position_x,
     if positions[i,0] >= x_size or positions[i,1] >= y_size :
         print("ERREUR position hors limite")
     else : 
-        node.translation = [int(grid_to_nodes*(positions[i,0]-ref_position_y)),0,int(grid_to_nodes*(positions[i,1]-ref_position_x))]
+        node.translation = [int(grid_to_nodes*(positions[i,0]-ref_position_x)),0,int(grid_to_nodes*(positions[i,1]-ref_position_y))]
         #node.scale=[2,2,1]
