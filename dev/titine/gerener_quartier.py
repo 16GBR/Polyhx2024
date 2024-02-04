@@ -20,9 +20,9 @@ def centeredAngledElliptic(theta, eccentricite, superficie):
 theta, eccentricite, superficie = 120, 0.95, 45000
 x, y, a, b, superficie = centeredAngledElliptic(theta, eccentricite, superficie)
 
-plt.plot(x, y, "-r")
-plt.xlim(-1*a, a)
-plt.ylim(-1*a, a)
-plt.axhline(ls=":", c="k")
-plt.axvline(ls=":", c="k")
+#plt.plot(x, y, "-r")
+#plt.xlim(-1*a, a)
+#plt.ylim(-1*a, a)
+#plt.axhline(ls=":", c="k")
+#plt.axvline(ls=":", c="k")
 #plt.show()
