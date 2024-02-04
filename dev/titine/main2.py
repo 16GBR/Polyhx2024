@@ -53,11 +53,11 @@ def check_tout_est_place(nb_maisons_type1, nb_maisons_type2, nb_epicerie, nb_job
     return everything_is_there
 
 #Parametres de generation
-nb_maisons_type1_needed = 240
+nb_maisons_type1_needed = 224
 nb_maisons_type2_needed = 100
 nb_epicerie_needed = 20
 nb_job_needed = 15
-nb_ecole_needed = 10
+nb_ecole_needed = 4*6 #car bloc de 2x3
 nb_centre_loisir_needed = 5
 nb_boutique_needed = 5
 nb_retail_needed = 5
@@ -81,31 +81,48 @@ nb_retail = 0
 while check_tout_est_place(nb_maisons_type1, nb_maisons_type2, nb_epicerie, nb_job, nb_ecole, nb_centre_loisir, nb_boutique, nb_retail) == False:
     for row in range(map.shape[0]):
         for col in range(map.shape[1]):
-            if np.random.rand()>.9 and nb_maisons_type1<nb_maisons_type1_needed and map[row, col] == None:
+            #numb = np.floor(np.random.rand()*10)
+            numb = np.random.rand()*10
+            if numb <=6 and nb_maisons_type1<nb_maisons_type1_needed and map[row, col] == None:
                 map[row, col] = batiment(couleur="red", lettre="M1")
-                nb_maisons_type1=nb_maisons_type1+1     
-            elif np.random.rand()>.9 and nb_maisons_type2<nb_maisons_type2_needed and map[row, col] == None:
+                nb_maisons_type1=nb_maisons_type1+1   
+            elif numb <=9 and nb_maisons_type2<nb_maisons_type2_needed and map[row, col] == None:
                 map[row, col] = batiment(couleur="salmon", lettre="M2")
-                nb_maisons_type2=nb_maisons_type2+1  
-            elif np.random.rand()>.9 and nb_epicerie<nb_epicerie_needed and map[row, col] == None:
+                nb_maisons_type2=nb_maisons_type2+1    
+            elif numb <=9.1 and nb_epicerie<nb_epicerie_needed and map[row, col] == None:
                 map[row, col] = batiment(couleur="brown", lettre="Ep")
                 nb_epicerie=nb_epicerie+1  
-            elif np.random.rand()>.9 and nb_job<nb_job_needed and map[row, col] == None:
+            elif numb <=9.3 and nb_job<nb_job_needed and map[row, col] == None:
                 map[row, col] = batiment(couleur="magenta", lettre="J")
                 nb_job=nb_job+1  
-            elif np.random.rand()>.9 and nb_ecole<nb_ecole_needed and map[row, col] == None:
-                map[row, col] = batiment(couleur="gold", lettre="Ec")
-                nb_ecole=nb_ecole+1  
-            elif np.random.rand()>.9 and nb_centre_loisir<nb_centre_loisir_needed and map[row, col] == None:
+            elif numb <=9.4 and nb_ecole<nb_ecole_needed and map[row, col] == None:
+                pile_face = np.random.rand()
+                if pile_face<=.5 and row+1<map.shape[0] and col+2<map.shape[1]:#2x3
+                    map[row, col] = batiment(couleur="gold", lettre="Ec")
+                    map[row, col+1] = batiment(couleur="gold", lettre="Ec")
+                    map[row, col+2] = batiment(couleur="gold", lettre="Ec")
+                    map[row+1, col] = batiment(couleur="gold", lettre="Ec")
+                    map[row+1, col+1] = batiment(couleur="gold", lettre="Ec")
+                    map[row+1, col+2] = batiment(couleur="gold", lettre="Ec")
+                    nb_ecole=nb_ecole+6
+                elif row+2<map.shape[0] and col+1<map.shape[1]: #3x2
+                    map[row, col] = batiment(couleur="gold", lettre="Ec")
+                    map[row+1, col] = batiment(couleur="gold", lettre="Ec")
+                    map[row+2, col] = batiment(couleur="gold", lettre="Ec")
+                    map[row, col+1] = batiment(couleur="gold", lettre="Ec")
+                    map[row+1, col+1] = batiment(couleur="gold", lettre="Ec")
+                    map[row+2, col+1] = batiment(couleur="gold", lettre="Ec")
+                    nb_ecole=nb_ecole+6
+            elif numb <=9.5 and nb_centre_loisir<nb_centre_loisir_needed and map[row, col] == None:
                 map[row, col] = batiment(couleur="khaki", lettre="C")
                 nb_centre_loisir=nb_centre_loisir+1  
-            elif np.random.rand()>.9 and nb_boutique<nb_boutique_needed and map[row, col] == None:
+            elif numb <= 9.6 and nb_boutique<nb_boutique_needed and map[row, col] == None:
                 map[row, col] = batiment(couleur="darkgray", lettre="B")
                 nb_boutique=nb_boutique+1  
-            elif np.random.rand()>.9 and nb_retail<nb_retail_needed and map[row, col] == None:
+            elif numb <=9.7 and nb_retail<nb_retail_needed and map[row, col] == None:
                 map[row, col] = batiment(couleur="black", lettre="R")
                 nb_retail=nb_retail+1  
-            
+
 #fill les trous de parc
 for row in range(map.shape[0]):
     for col in range(map.shape[1]):
