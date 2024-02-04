@@ -1,7 +1,7 @@
 import numpy as np
 import pygltflib
 
-def copy_and_modify_gltf(input_path, output_path, liste_noms, modification_function, x_size, y_size, liste_postitions, grid_to_nodes):
+def copy_and_modify_gltf(input_path, output_path, liste_noms, liste_rotations, modification_function, x_size, y_size, liste_postitions, grid_to_nodes):
     # Load the glTF file
     gltf = pygltflib.GLTF2().load(input_path)
 
