@@ -31,17 +31,20 @@ def creer_carres(center, size):
     return x, y
 
 #Parametres de generation
-nb_maisons_type1_needed = 215
-nb_maisons_type2_needed = 100
-nb_epicerie_needed = 20
-nb_job_needed = 15
-nb_ecole_needed = 4*6 #car bloc de 2x3
-nb_centre_loisir_needed = 4*2 #car bloc de 1x2
-nb_boutique_needed = 5
-nb_retail_needed = 5
+nb_maisons_type1_needed = 5775
+nb_maisons_type2_needed = 1890
+nb_epicerie_needed = 300
+nb_job_needed = 200
+nb_ecole_needed = 80*6 #car bloc de 2x3
+nb_centre_loisir_needed = 160*2 #car bloc de 1x2
+nb_boutique_needed = 300
+nb_retail_needed = 100*2
+
+etage_plex = 3
+etage_appart = 6
 
 #Creation de la map vide
-map = np.full((20, 20), None, dtype=object)
+map = np.full((100, 100), None, dtype=object)
 
 #Generer ellipse (quartier)
 theta, eccentricite, superficie = 120, 0.95, 25
@@ -61,7 +64,7 @@ while nb_ecole<nb_ecole_needed:
     coord_x = int(np.floor(np.random.rand()*map.shape[0]))
     coord_y = int(np.floor(np.random.rand()*map.shape[1]))
     pile_face = np.random.rand()
-    if pile_face<=.5 and coord_x+1<map.shape[0] and coord_y+2<map.shape[1]:#2x3
+    if pile_face<=.5 and coord_x+1<map.shape[0] and coord_y+2<map.shape[1] and map[coord_x, coord_y] == None and map[coord_x, coord_y+1] == None and map[coord_x, coord_y+2] == None and map[coord_x+1, coord_y] == None and map[coord_x+1, coord_y+1] and map[coord_x+1, coord_y+2] == None:#2x3
         map[coord_x, coord_y] = batiment(couleur="gold", lettre="Ec")
         map[coord_x, coord_y+1] = batiment(couleur="gold", lettre="Ec")
         map[coord_x, coord_y+2] = batiment(couleur="gold", lettre="Ec")
@@ -69,7 +72,7 @@ while nb_ecole<nb_ecole_needed:
         map[coord_x+1, coord_y+1] = batiment(couleur="gold", lettre="Ec")
         map[coord_x+1, coord_y+2] = batiment(couleur="gold", lettre="Ec")
         nb_ecole=nb_ecole+6
-    elif coord_x+2<map.shape[0] and coord_y+1<map.shape[1]: #3x2
+    elif coord_x+2<map.shape[0] and coord_y+1<map.shape[1] and map[coord_x, coord_y]== None and map[coord_x+1, coord_y]== None and map[coord_x+2, coord_y]== None and map[coord_x, coord_y+1]== None and map[coord_x+1, coord_y+1]== None and map[coord_x+2, coord_y+1]== None: #3x2
         map[coord_x, coord_y] = batiment(couleur="gold", lettre="Ec")
         map[coord_x+1, coord_y] = batiment(couleur="gold", lettre="Ec")
         map[coord_x+2, coord_y] = batiment(couleur="gold", lettre="Ec")
@@ -164,6 +167,7 @@ def dist_mesure(lettre):
                             dist_min=dist
     return dist_min
 
+print("Calcul du temps")
 #trouver le temps de deplacement pour chaque maison
 vit_moy=1.5 # m/s
 facteur_distance = 40 #m
@@ -196,21 +200,22 @@ for row in range(map.shape[0]):
 ratio=[2/7, 5/7, 5/7, 2/7, 1/7, .5/7, .5/7]
 den_ratio = 16/7
 
+print("Calcul du social credit")
 social_credit = 0
 sum_all_house = 0
 for liste in liste_temps_M1:
     sum = 0
     for i in range(liste.shape[0]):
         sum = sum+temps[i]*ratio[i]
-    sum_all_house = sum_all_house+sum/den_ratio*20
+    sum_all_house = sum_all_house+sum/den_ratio*10*etage_plex
 
 for liste in liste_temps_M2:
     sum = 0
     for i in range(liste.shape[0]):
         sum = sum+temps[i]*ratio[i]
-    sum_all_house = sum_all_house+sum/den_ratio*(20*6)
+    sum_all_house = sum_all_house+sum/den_ratio*(20*etage_appart)
 
-social_credit = sum_all_house/(nb_maisons_type1_needed*20 + nb_maisons_type2_needed*(20*6))
+social_credit = sum_all_house/(nb_maisons_type1_needed*10*etage_plex + nb_maisons_type2_needed*(20*etage_appart))
 print(social_credit)
 
 # Creer des carres
